@@ -23,17 +23,30 @@ public class DiffPrint {
     }
 
     private void printDiffHelper(int i, int j) {
-        if (i >= 0 && j >= 0 && indices1.contains(i+1) && indices2.contains(j+1) && indices1.indexOf(i+1) == indices2.indexOf(j+1)) {
-            printDiffHelper(i - 1, j - 1);
-            System.out.println("  " + lines1.get(i).line);
-        } else if (j > 0 && (i == 0 || dp[i][j - 1] >= dp[i - 1][j])) {
-            printDiffHelper(i,j - 1);
+        if (i < 0 && j < 0) {
+            System.out.print("");
+        } else if (i < 0) {
+            printDiffHelper(i, j - 1);
             System.out.println("+ " + lines2.get(j).line);
-        } else if (i > 0 && (j == 0 || dp[i][j - 1] < dp[i - 1][j])) {
+        } else if (j < 0) {
             printDiffHelper(i - 1, j);
             System.out.println("- " + lines1.get(i).line);
-        } else {
-            System.out.print("");
+        } else if (indices1.contains(i+1) && indices2.contains(j+1) && indices1.indexOf(i+1) == indices2.indexOf(j+1)) {
+            printDiffHelper(i - 1, j - 1);
+            System.out.println("  " + lines1.get(i).line);
+        } else if (i == 0) {
+            printDiffHelper(i, j - 1);
+            System.out.println("+ " + lines2.get(j).line);
+        } else if (j == 0) {
+            printDiffHelper(i - 1, j);
+            System.out.println("- " + lines1.get(i).line);
+        }
+        else if (dp[i][j - 1] >= dp[i - 1][j]) {
+            printDiffHelper(i, j - 1);
+            System.out.println("+ " + lines2.get(j).line);
+        } else if (dp[i][j - 1] < dp[i - 1][j]) {
+            printDiffHelper(i - 1, j);
+            System.out.println("- " + lines1.get(i).line);
         }
     }
 
