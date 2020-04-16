@@ -1,12 +1,10 @@
 import com.google.common.base.Charsets;
 import com.google.common.hash.*;
 
-import java.nio.charset.Charset;
-
 public class Hash10 {
 
-    String s;
-    HashFunction hf;
+    private String s;
+    private HashFunction hf;
 
     public Hash10(String s) {
         this.s = s;
