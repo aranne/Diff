@@ -56,6 +56,26 @@ public class Diff {
         System.out.println();
     }
 
+    public List<HashFile.Line> getLines1() {
+        return lines1;
+    }
+
+    public List<HashFile.Line> getLines2() {
+        return lines2;
+    }
+
+    public List<Integer> getIndices1() {
+        return indices1;
+    }
+
+    public List<Integer> getIndices2() {
+        return indices2;
+    }
+
+    public int[][] getDp() {
+        return dp;
+    }
+
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("Argument number error.");
