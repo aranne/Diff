@@ -27,6 +27,8 @@ public class Diff {
                         } else {
                             dp[i][j] = dp[i - 1][j - 1] + 1;
                         }
+                    } else {
+                        System.out.println("Collision happens");       // To detect collision
                     }
                 } else {
                     if (i == 0 && j == 0) {
