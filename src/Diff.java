@@ -27,8 +27,6 @@ public class Diff {
                         } else {
                             dp[i][j] = dp[i - 1][j - 1] + 1;
                         }
-                        indices1.add(i + 1);
-                        indices2.add(j + 1);
                     }
                 } else {
                     if (i == 0 && j == 0) {
@@ -42,6 +40,31 @@ public class Diff {
                     }
                 }
             }
+        }
+    }
+
+    public void getIndices() {
+        getIndicesHelper(lines1.size() - 1, lines2.size() - 1);
+    }
+
+    private void getIndicesHelper(int i, int j) {
+        if (i < 0 && j < 0) {
+        } else if (i < 0) {
+            getIndicesHelper(i, j - 1);
+        } else if (j < 0) {
+            getIndicesHelper(i - 1, j);
+        } else if (lines1.get(i).hashcode == lines2.get(j).hashcode && lines1.get(i).line.equals(lines2.get(j).line)) {
+            getIndicesHelper(i - 1, j - 1);
+            indices1.add(i + 1);
+            indices2.add(j + 1);
+        } else if (i == 0) {
+            getIndicesHelper(i, j - 1);
+        } else if (j == 0) {
+            getIndicesHelper(i - 1, j);
+        } else if (dp[i][j - 1] >= dp[i - 1][j]) {
+            getIndicesHelper(i, j - 1);
+        } else if (dp[i][j - 1] < dp[i - 1][j]) {
+            getIndicesHelper(i - 1, j);
         }
     }
 
@@ -64,14 +87,6 @@ public class Diff {
         return lines2;
     }
 
-    public List<Integer> getIndices1() {
-        return indices1;
-    }
-
-    public List<Integer> getIndices2() {
-        return indices2;
-    }
-
     public int[][] getDp() {
         return dp;
     }
@@ -83,6 +98,7 @@ public class Diff {
         }
         Diff diff = new Diff(args[0], args[1]);
         diff.diff();
+        diff.getIndices();
         diff.printDiffIndices();
     }
 }

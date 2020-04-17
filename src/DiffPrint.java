@@ -4,8 +4,6 @@ public class DiffPrint {
 
     private List<HashFile.Line> lines1;
     private List<HashFile.Line> lines2;
-    private List<Integer> indices1;
-    private List<Integer> indices2;
     private int[][] dp;
 
     public DiffPrint(String filename1, String filename2) {
@@ -13,8 +11,6 @@ public class DiffPrint {
         diff.diff();
         lines1 = diff.getLines1();
         lines2 = diff.getLines2();
-        indices1 = diff.getIndices1();
-        indices2 = diff.getIndices2();
         dp = diff.getDp();
     }
 
@@ -31,7 +27,7 @@ public class DiffPrint {
         } else if (j < 0) {
             printDiffHelper(i - 1, j);
             System.out.println("- " + lines1.get(i).line);
-        } else if (indices1.contains(i+1) && indices2.contains(j+1) && indices1.indexOf(i+1) == indices2.indexOf(j+1)) {
+        } else if (lines1.get(i).hashcode == lines2.get(j).hashcode && lines1.get(i).line.equals(lines2.get(j).line)) {
             printDiffHelper(i - 1, j - 1);
             System.out.println("  " + lines1.get(i).line);
         } else if (i == 0) {
@@ -40,8 +36,7 @@ public class DiffPrint {
         } else if (j == 0) {
             printDiffHelper(i - 1, j);
             System.out.println("- " + lines1.get(i).line);
-        }
-        else if (dp[i][j - 1] >= dp[i - 1][j]) {
+        } else if (dp[i][j - 1] >= dp[i - 1][j]) {
             printDiffHelper(i, j - 1);
             System.out.println("+ " + lines2.get(j).line);
         } else if (dp[i][j - 1] < dp[i - 1][j]) {
