@@ -40,7 +40,7 @@ public class HashFile {
 
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.out.println("Argument number error.");
+            System.out.println("Number of Arguments Error.");
             System.exit(0);
         }
         HashFile hf = new HashFile(args[0]);

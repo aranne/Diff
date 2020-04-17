@@ -47,7 +47,7 @@ public class DiffPrint {
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.println("Argument number error.");
+            System.out.println("Number of Arguments Error.");
             System.exit(0);
         }
         DiffPrint diffPrint = new DiffPrint(args[0], args[1]);
