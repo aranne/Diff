@@ -23,7 +23,7 @@ Then use Longest Common Subsequences to get the common lines between two files.
    $java -jar DiffPrint.jar ex41.txt ex42.txt
 
 #### Example output:
-$ diffprint  f1.txt f2.txt 
+$ java DiffPrint.jar f1.txt f2.txt 
 
    Hello
 
